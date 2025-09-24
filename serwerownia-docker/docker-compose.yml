@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dcim_owner
+      POSTGRES_PASSWORD: DcimOwner!2025#
+      POSTGRES_DB: dcim_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U dcim_owner -d dcim_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  server:
+    build:
+      context: ./
+      dockerfile: ./server.dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: 8080
+      PGHOST: db
+      PGPORT: 5432
+      PGDATABASE: dcim_db
+      PGUSER: dcim_owner
+      PGPASSWORD: DcimOwner!2025#
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:

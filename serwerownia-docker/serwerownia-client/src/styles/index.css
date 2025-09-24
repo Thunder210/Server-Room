@@ -1,0 +1,160 @@
+:root {
+  --bg: #0b0f14;
+  --fg: #e6e6e6;
+  --muted: #94a3b8;
+  --card: #121822;
+  --border: #1f2835;
+  --primary: #3b82f6;
+  --danger: #ef4444;
+  --info: #06b6d4;
+  --warn: #f59e0b;
+  --accent: #22c55e;
+  --shadow: 0 6px 26px rgba(0,0,0,.35);
+  --radius: 14px;
+  --speed: .2s;
+}
+
+:root[data-theme="light"] {
+  --bg: #f7f7fb;
+  --fg: #0b0f14;
+  --muted: #64748b;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --primary: #2563eb;
+  --danger: #dc2626;
+  --info: #0891b2;
+  --warn: #b45309;
+  --accent: #16a34a;
+  --shadow: 0 6px 26px rgba(0,0,0,.08);
+}
+
+* { box-sizing: border-box }
+html, body, #root { height: 100% }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.app { min-height: 100%; display: grid; grid-template-rows: auto 1fr auto }
+
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--card)
+}
+.brand { text-decoration: none; color: var(--fg); font-weight: 700; letter-spacing: .3px }
+.header-actions { display: flex; gap: 12px; align-items: center }
+
+.footer {
+  position: sticky; bottom: 0; width: 100%;
+  border-top: 1px solid var(--border); background: var(--card);
+  padding: 10px 16px; text-align: center; color: var(--muted)
+}
+
+.main { padding: 24px }
+
+.container { max-width: 1200px; margin: 0 auto }
+.title { margin: 0 0 16px 0; font-size: 28px }
+.subtitle { margin: 0; font-size: 22px }
+.muted { color: var(--muted) }
+
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 16px
+}
+.rack-card {
+  display: block; text-decoration: none; color: var(--fg);
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px; box-shadow: var(--shadow); transition: transform var(--speed), box-shadow var(--speed)
+}
+.rack-card:hover { transform: translateY(-2px) }
+.rack-name { font-weight: 700; margin-bottom: 10px }
+.rack-visual { height: 120px; background: repeating-linear-gradient(90deg, transparent 0 10px, rgba(255,255,255,.05) 10px 12px); border-radius: 10px }
+
+.rack-head { display: grid; grid-template-columns: 100px 1fr 100px; align-items: center; gap: 8px; margin-bottom: 16px }
+
+.btn {
+  border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  padding: 10px 14px; border-radius: 12px; cursor: pointer; transition: transform var(--speed), background var(--speed), border var(--speed)
+}
+.btn:hover { transform: translateY(-1px) }
+.btn:active { transform: translateY(0) scale(.98) }
+.btn.primary { background: var(--primary); border-color: transparent; color: white }
+.btn.danger { background: var(--danger); border-color: transparent; color: white }
+.btn.ghost { background: transparent }
+
+.plus { font-size: 22px; font-weight: 700 }
+
+.icon-btn {
+  border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  width: 36px; height: 36px; border-radius: 10px; cursor: pointer
+}
+
+.form { display: grid; gap: 10px }
+.label { font-size: 14px; color: var(--muted) }
+.input {
+  width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--fg)
+}
+.row { display: flex; gap: 8px; align-items: center }
+
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 12px; overflow: hidden }
+.seg-btn { padding: 8px 12px; border: none; background: transparent; color: var(--fg); cursor: pointer }
+.seg-btn.active { background: var(--primary); color: white }
+
+.devices-list { display: grid; gap: 12px }
+.device-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px }
+.device-title { font-weight: 700; margin-bottom: 8px }
+.kv { display: grid; grid-template-columns: 80px 1fr; gap: 10px }
+.k { color: var(--muted) }
+.v { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+
+.toggle {
+  position: relative; width: 58px; height: 30px; border-radius: 999px; border: 1px solid var(--border);
+  background: var(--bg); cursor: pointer; transition: background var(--speed)
+}
+.knob { position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); transition: left var(--speed) }
+.knob.light { left: 31px }
+
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; z-index: 50
+}
+.modal {
+  width: min(560px, 92vw); background: var(--card); color: var(--fg); border: 1px solid var(--border);
+  border-radius: 16px; box-shadow: var(--shadow)
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--border) }
+.modal-title { font-weight: 700 }
+.modal-body { padding: 14px }
+
+.toast {
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+  background: var(--card); border: 1px solid var(--border); color: var(--fg);
+  padding: 12px 14px; border-radius: 12px; box-shadow: var(--shadow); min-width: 260px; text-align: center; animation: fade .2s ease-in
+}
+.toast.success { border-color: var(--accent) }
+.toast.info { border-color: var(--info) }
+.toast.warning { border-color: var(--warn) }
+.toast.error { border-color: var(--danger) }
+.toast-title { font-weight: 700 }
+.toast-msg { font-size: 14px; color: var(--muted) }
+@keyframes fade { from { opacity: 0; transform: translateX(-50%) translateY(6px) } to { opacity: 1; transform: translateX(-50%) translateY(0) } }
+
+.input-error { border-color: var(--danger) }
+
+.btn { will-change: transform, box-shadow }
+.btn.primary:hover { box-shadow: 0 6px 18px rgba(59,130,246,.35) }
+.btn.danger:hover { box-shadow: 0 6px 18px rgba(239,68,68,.35) }
+.seg-btn { transition: background var(--speed), transform var(--speed) }
+.seg-btn:active { transform: scale(.98) }
+
+.icon-btn:hover { transform: translateY(-1px) }
+.icon-btn:active { transform: translateY(0) scale(.98) }
+
+.knob { display: grid; place-items: center; color: white }
+:root[data-theme="light"] .knob { color: #f59e0b }
+
+.header-left { display: flex; align-items: center; gap: 16px }
+.nav { display: flex; gap: 12px }
+.nav-link { text-decoration: none; color: var(--muted); padding: 6px 10px; border-radius: 10px; border: 1px solid transparent }
+.nav-link.active { color: var(--fg); border-color: var(--border); background: var(--card) }
